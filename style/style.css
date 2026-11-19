@@ -29,9 +29,6 @@ body {
   line-height: 1;
 }
 
-html *:hover {
-  background-color: red;
-}
 
 /* ============================================================
    2. HERO: el carrusel de la portada
@@ -40,7 +37,7 @@ html *:hover {
   position: relative;
   height: 100vh;
   min-height: 560px;
-  z-index: -1;
+  z-index: 0;
   /* Estrellas hechas solo con CSS (varios puntos de luz) */
   background:
     radial-gradient(1.5px 1.5px at 12% 20%, #fff, transparent),
@@ -50,7 +47,7 @@ html *:hover {
     radial-gradient(1.5px 1.5px at 88% 22%, #fff, transparent),
     radial-gradient(1px 1px at 20% 80%, #fff, transparent),
     radial-gradient(1px 1px at 92% 70%, #fff, transparent),
-    var(--fondo);
+    transparent;
 }
 
 /* El planeta: un círculo enorme que solo asoma su parte de arriba */
@@ -64,7 +61,7 @@ html *:hover {
   border-radius: 100%;
   background: var(--planeta);
 
-  z-index: -2;
+  z-index: -1;
 
   box-shadow:
     0 0 10vmin color-mix(in hsl increasing hue, var(--brillo) 90%, var(--fondo-claro) 10%),
@@ -173,8 +170,9 @@ html *:hover {
    ============================================================ */
 
 .cuerpo {
-  top: 100vh;
-  z-index: 2;
+  position: relative;
+  width: 100vw;
+  z-index: 1;
 }
 
 section.contenido {
