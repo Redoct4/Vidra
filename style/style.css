@@ -1,0 +1,250 @@
+/* ============================================================
+   1. VARIABLES: cambia un color aquí y cambia en toda la página
+   ============================================================ */
+:root {
+  --fondo: #0f060c;
+  --fondo-claro: #2b1620;
+  --planeta: #070d11;
+  --brillo: #e58a9b;
+  --magenta: #d4208f;
+  --verde: #6ee03a;
+  --texto: #f3e9ee;
+  --texto-suave: #b9a5ae;
+  --titulo: "Syncopate", sans-serif;
+  --cuerpo: "Cardo", serif;
+  --nombre-color: #f3e9ee1f;
+  --nombre-tamano: 13vw;
+}
+
+/* Reinicio básico: quita márgenes raros del navegador */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { 
+  scroll-behavior: smooth; 
+  overflow-x: hidden;}
+body {
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--cuerpo);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+/* ============================================================
+   2. HERO: el carrusel de la portada
+   ============================================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 560px;
+  z-index: -1;
+  /* Estrellas hechas solo con CSS (varios puntos de luz) */
+  background:
+    radial-gradient(1.5px 1.5px at 12% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 30% 55%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 55% 12%, #fff, transparent),
+    radial-gradient(1px 1px at 72% 40%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 88% 22%, #fff, transparent),
+    radial-gradient(1px 1px at 20% 80%, #fff, transparent),
+    radial-gradient(1px 1px at 92% 70%, #fff, transparent),
+    var(--fondo);
+}
+
+/* El planeta: un círculo enorme que solo asoma su parte de arriba */
+.planeta {
+  position: absolute;
+  left: 50%;
+  bottom: -98vw;
+  width: 120vw;
+  height: 120vw;
+  transform: translateX(-50%);
+  border-radius: 100%;
+  background: var(--planeta);
+
+  z-index: -1;
+
+  box-shadow:
+    0 0 10vmin color-mix(in hsl increasing hue, var(--brillo) 90%, var(--fondo-claro) 10%),
+    0 0 50vmin -1vmax color-mix(in hsl increasing hue, var(--brillo) 90%, transparent 10%),
+    0 0 5vmin color-mix(in hsl increasing hue, var(--brillo) 40%, hsl(0, 100%, 85%) 60%);   
+  filter: blur(5px);
+
+
+  transition: box-shadow 0.6s ease;
+}
+
+.hero-vidra {
+  --espaciado-letra: 3em;
+
+  position: absolute;
+  bottom: 0.2em;
+  width: 100%;
+  text-align: center;
+  font-family: var(--titulo);
+  font-size: clamp(1rem, 4vh, 4rem);
+  letter-spacing: var(--espaciado-letra);
+  padding-left: var(--espaciado-letra);
+  text-transform: lowercase;
+  z-index: 3;
+  opacity: 50%;
+
+  font-weight: 0;
+}
+
+/* Cada criatura es una "slide" apilada; solo la activa se ve */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s;
+  text-decoration: none;
+  color: inherit;
+  z-index: 2;
+}
+.slide.activa { opacity: 1; visibility: visible; }
+
+.slide-nombre {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  font-family: var(--titulo);
+  font-weight: 700;
+  font-size: var(--nombre-tamano);
+  background: linear-gradient(to bottom, var(--nombre-color), transparent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 0.02em;
+  transform: translateY(-20px);
+  transition: transform 0.8s ease, color 0.8s ease;
+  padding-top: 2.4vw;
+  text-indent: 0.02em;
+}
+.slide.activa .slide-nombre { transform: translateY(0); }
+
+/* Espacio de la criatura. Aquí irá tu ilustración (ver nota abajo) */
+.slide-imagen {
+  width: min(110vh, 100vw);
+  aspect-ratio: 1;
+  margin-top: 4vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--texto-suave);
+  transform: scale(0.92);
+  transition: transform 0.8s ease;
+}
+.slide.activa .slide-imagen { transform: scale(1); }
+/* Cuando uses <img>, se ajusta solita al espacio: */
+.slide-imagen img { width: 100%; height: 100%; object-fit: contain; }
+
+/* Vecinasas */
+.vecina {
+  position: absolute;
+  bottom: 12vh;             /* qué tan abajo van */
+  z-index: 4;               /* por encima de las slides, para poder hacer clic */
+  width: 18vw;              /* tamaño de la vecina */
+  background: none;         /* quita el fondo gris del botón */
+  border: none;
+  cursor: pointer;
+}
+.vecina img {
+  display: block;
+  width: 100%;
+  filter: brightness(0.3);  /* la versión oscura */
+  transition: filter 0.3s, opacity 0.4s;
+}
+.vecina:hover img,
+.vecina:focus-visible img { filter: brightness(0.6); }
+.vecina.izq { left: 8vw; }
+.vecina.der { right: 8vw; }
+
+/* ============================================================
+   3. SECCIONES DE ABAJO
+   ============================================================ */
+
+.cuerpo {
+  top: 100vh;
+}
+
+section.contenido {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+}
+h2 {
+  font-family: var(--titulo);
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  margin-bottom: 2rem;
+}
+.planeta-texto { max-width: 62ch; color: var(--texto-suave); }
+.planeta-texto p + p { margin-top: 1.2rem; }
+
+/* Índice: una cuadrícula que se reacomoda sola según el ancho */
+.indice {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.tarjeta {
+  display: block;
+  padding: 1.5rem;
+  background: var(--fondo-claro);
+  border-left: 4px solid var(--magenta);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.25s, border-color 0.25s;
+.tarjeta-cabecera {
+  display: flex;          /* pone ícono y texto en fila */
+  align-items: center;    /* los centra verticalmente */
+  gap: 1rem;              /* espacio entre ellos */
+  margin-bottom: 1rem;    /* separación con los datos de abajo */
+}
+.tarjeta-icono {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;    /* que no se deforme */
+  flex-shrink: 0;         /* que no se aplaste si falta espacio */
+}
+}
+.tarjeta:hover, .tarjeta:focus-visible { transform: translateY(-4px); border-color: var(--verde); }
+.tarjeta h3 { font-family: var(--titulo); font-size: 1.1rem; }
+.tarjeta em { display: block; margin: 0.3rem 0 1rem; color: var(--texto-suave); }
+.tarjeta dl { display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 1rem; font-size: 0.95rem; }
+.tarjeta dt { color: var(--texto-suave); }
+
+/* Respeta a quien pide menos movimiento en su dispositivo */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* ============================================================
+   4. AJUSTES PARA CELULAR (pantallas de menos de 700px)
+   ============================================================ */
+@media (max-width: 700px) {
+  .vecina { width: 28vw; bottom: 16vh; }
+  .vecina.izq { left: -8vw; }
+  .vecina.der { right: -8vw; }
+  .slide-nombre {
+    font-size: calc(var(--nombre-tamano) * 0.9);
+  }
+  .hero-vidra {
+    font-size: 2rem;
+    letter-spacing: 0.35em;
+    text-indent: 0.35em;
+  }
+}
+    #Creditos{
+        padding: 0.9rem;
+        margin: 1rem 0;
+        margin-bottom: 0;
+        font-family: "Syncopate", sans-serif;
+        text-align: center;
+        font-size: small;
+        background-color: #121c24;
+    }
