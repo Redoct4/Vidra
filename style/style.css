@@ -12,7 +12,7 @@
   --texto-suave: #b9a5ae;
   --titulo: "Syncopate", sans-serif;
   --cuerpo: "Cardo", serif;
-  --nombre-color: #f3e9ee1f;
+  --nombre-color: #ffffff;
   --nombre-tamano: 13vw;
 }
 
@@ -188,12 +188,127 @@ h2 {
 .planeta-texto { max-width: 62ch; color: var(--texto-suave); }
 .planeta-texto p + p { margin-top: 1.2rem; }
 
-/* Índice: una cuadrícula que se reacomoda sola según el ancho */
 .indice {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
+
+.indice-glifos {
+  --interactive-margin: 10vw;
+
+  margin-left: 5vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4vh;
+
+  width: calc(clamp(15px, calc(55vmin / 6), 30vw) + var(--interactive-margin));
+
+  > button {
+    background: transparent;
+    border: none;
+    display:flex;
+
+    /* desactivado y anim */
+    opacity: 30%;
+    transition: 
+      opacity 0.2s,
+      transform 0.3s;
+
+    img {
+      width: calc(100% - var(--interactive-margin));
+      padding-right: auto;
+      aspect-ratio: 1;
+    }
+  }
+}
+.indice-glifos button.activa {
+  opacity: 100%;
+  transform: translateX(3vmin);
+}
+
+.indice-mostrando {
+  margin-right: 9vmin;
+  /* background-color: rgba(255, 0, 0, 0.363); */
+
+  width: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.indice-elemento {
+  /* background-color: rgba(0, 195, 255, 0.363); */
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* desactivado */
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+
+  transition:
+    opacity 0.3s,
+    visibility 0.3s,
+    display 0s 0.3s;
+
+  text-decoration: none;
+
+  > .indice-titulo {
+    font-size: 6vmin;
+    font-family: var(--titulo);
+    text-transform: uppercase;
+
+    margin-bottom: 3vmin;
+
+    color: var(--nombre-color)
+  }
+
+  > img {
+    height: 50vmin;
+    max-width: 60vw;
+    object-fit: contain;
+  }
+
+  > .indice-cientifico {
+    margin-top: 1vmin;
+    margin-bottom: 3vmin;
+
+    font-size: calc(3.5vmin);
+    font-style: italic;
+    opacity: 60%;
+
+    color: var(--nombre-color)
+  }
+
+  > .indice-datos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 60%;
+    margin-top: 4vmin;
+
+    > p {
+      font-size: 1.1rem;
+      opacity: 60%;
+
+      color:#fff;
+    }
+  }
+}
+.indice-elemento.activa {
+  opacity: 1;
+  visibility: visible;
+  display: flex;
+}
+
 .tarjeta {
   display: block;
   padding: 1.5rem;
@@ -240,6 +355,12 @@ h2 {
     font-size: 2rem;
     letter-spacing: 0.35em;
     text-indent: 0.35em;
+  }
+  .indice-glifos {
+    --interactive-margin: 0vw;
+    > button.activa {
+      transform: translateX(1.5vw);
+    }
   }
 }
     #Creditos{
