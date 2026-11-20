@@ -190,59 +190,85 @@ h2 {
 
 .indice {
   margin-top: 5rem;
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+.indice-links {
+  position: absolute;
+  height: 110%;
+  width: 100%;
+  translate: -50% -50%;
+  top: 50%;
+  left: 50%;
+
+  cursor:pointer;
+}
 
 .indice-glifos {
   --interactive-margin: 10vw;
+  --button-width: clamp(15px, calc(55vmin / 6), 30vw);
 
   margin-left: 5vmin;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 4vh;
+  flex-shrink: 0;
 
-  width: calc(clamp(15px, calc(55vmin / 6), 30vw) + var(--interactive-margin));
 
-  > button {
+  width: calc(var(--button-width) + var(--interactive-margin));
+  
+
+  > a {
     background: transparent;
     border: none;
     display:flex;
+    flex-shrink: 1;
+    padding: 2.5vh 0;
+    margin-bottom: -1vh;
+
+    transform-origin: left center;
+    scale: 0.9;
 
     /* desactivado y anim */
     opacity: 30%;
     transition: 
-      opacity 0.2s,
-      transform 0.3s;
+      opacity 0.15s,
+      translate 0.15s,
+      scale 0.3s;
 
     img {
       width: calc(100% - var(--interactive-margin));
       padding-right: auto;
       aspect-ratio: 1;
+      flex-shrink: 0;
     }
   }
 }
-.indice-glifos button.activa {
+.indice-glifos a.activa {
   opacity: 100%;
-  transform: translateX(3vmin);
+  translate: 3vmin 0;
+  scale: 1.2;
+
+  @starting-style {translate: 0 0; scale: 0.9;};
 }
 
 .indice-mostrando {
-  margin-right: 9vmin;
+  margin-right: 7vmin;
   /* background-color: rgba(255, 0, 0, 0.363); */
 
   width: auto;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
 }
 .indice-elemento {
   /* background-color: rgba(0, 195, 255, 0.363); */
 
+  grid-area: 1/1;
+
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -250,12 +276,11 @@ h2 {
   /* desactivado */
   opacity: 0;
   visibility: hidden;
-  display: none;
+  
 
   transition:
-    opacity 0.3s,
-    visibility 0.3s,
-    display 0s 0.3s;
+    opacity 0.4s,
+    visibility 0.4s;
 
   text-decoration: none;
 
@@ -264,20 +289,28 @@ h2 {
     font-family: var(--titulo);
     text-transform: uppercase;
 
-    margin-bottom: 3vmin;
+    opacity: 0;
 
-    color: var(--nombre-color)
+    color: var(--nombre-color);
+
+    transform: translateY(-3vh);
+    transition: transform 0.4s 0.2s, opacity 0.2s 0.2s;
   }
 
   > img {
     height: 50vmin;
     max-width: 60vw;
     object-fit: contain;
+    margin-top: 1vmin;
+
+    transform: scale(0.9);
+
+    transition: transform 0.3s 0.1s;
   }
 
   > .indice-cientifico {
-    margin-top: 1vmin;
-    margin-bottom: 3vmin;
+    margin-top: 4vmin;
+    margin-bottom: 1vmin;
 
     font-size: calc(3.5vmin);
     font-style: italic;
@@ -292,10 +325,13 @@ h2 {
     justify-content: space-between;
     align-items: center;
 
-    width: 60%;
+    width: 70%;
     margin-top: 4vmin;
 
     > p {
+      display: block;
+      text-align: center;
+      width: 33%;
       font-size: 1.1rem;
       opacity: 60%;
 
@@ -306,7 +342,21 @@ h2 {
 .indice-elemento.activa {
   opacity: 1;
   visibility: visible;
-  display: flex;
+
+  @starting-style { opacity: 0; }
+
+  > img {
+    transform: scale(1);
+    @starting-style { transform: scale(0.9);}
+  }
+
+  > .indice-titulo {
+    transform: translateY(0);
+    opacity: 1;
+    @starting-style { transform: translateY(-5vh); opacity: 0; }
+  }
+
+  
 }
 
 .tarjeta {
@@ -358,7 +408,7 @@ h2 {
   }
   .indice-glifos {
     --interactive-margin: 0vw;
-    > button.activa {
+    > a.activa {
       transform: translateX(1.5vw);
     }
   }
