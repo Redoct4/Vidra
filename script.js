@@ -58,43 +58,39 @@ CRIATURAS.forEach((c) => {
 const slides = document.querySelectorAll(".slide");
 const indiceElements = document.querySelectorAll(".indice-elemento");
 const indiceGlifos = document.querySelectorAll(".indice-glifos a");
+
 let actual = 0;
-function mostrar(n, carrusel) {
+
+function mostrar(n) {
   // El operador % hace que al llegar al final vuelva al principio
-  actual = (n + carrusel.length) % carrusel.length;
-  carrusel.forEach((s, i) => s.classList.toggle("activa", i === actual));
+  actual = (n + slides.length) % slides.length;
+  slides.forEach((s, i) => s.classList.toggle("activa", i === actual));
+  indiceElements.forEach((s, i) => s.classList.toggle("activa", i === actual));
+  indiceGlifos.forEach((s, i) => s.classList.toggle("activa", i === actual));
 
-  if (carrusel === slides) {
-    document.documentElement.style.setProperty("--brillo", CRIATURAS[actual].brillo);
-    const anterior  = (actual - 1 + CRIATURAS.length) % CRIATURAS.length;
-    const siguiente = (actual + 1) % CRIATURAS.length;
-    const imgsVecinas = document.querySelectorAll(".vecina img");
-    imgsVecinas.forEach((img) => (img.style.opacity = 0));     // 1. se desvanecen
-    setTimeout(() => {
-      document.querySelector("#anterior img").src  = `img/${CRIATURAS[anterior].id}.webp`;
-      document.querySelector("#siguiente img").src = `img/${CRIATURAS[siguiente].id}.webp`;
-      imgsVecinas.forEach((img) => (img.style.opacity = 1));   // 3. reaparecen
-    }, 400);
-  }
-
-  if (carrusel === indiceElements) {
-
-    indiceGlifos.forEach((s, i) => s.classList.toggle("activa", i === actual));
-
-  }
+  document.documentElement.style.setProperty("--brillo", CRIATURAS[actual].brillo);
+  const anterior  = (actual - 1 + CRIATURAS.length) % CRIATURAS.length;
+  const siguiente = (actual + 1) % CRIATURAS.length;
+  const imgsVecinas = document.querySelectorAll(".vecina img");
+  imgsVecinas.forEach((img) => (img.style.opacity = 0));     // 1. se desvanecen
+  setTimeout(() => {
+    document.querySelector("#anterior img").src  = `img/${CRIATURAS[anterior].id}.webp`;
+    document.querySelector("#siguiente img").src = `img/${CRIATURAS[siguiente].id}.webp`;
+    imgsVecinas.forEach((img) => (img.style.opacity = 1));   // 3. reaparecen
+  }, 400);
   
 }
 
 /* ==
   CARRUSEL
 == */ 
-document.getElementById("anterior").addEventListener("click", () => mostrar(actual - 1, slides));
-document.getElementById("siguiente").addEventListener("click", () => mostrar(actual + 1, slides));
+document.getElementById("anterior").addEventListener("click", () => mostrar(actual - 1));
+document.getElementById("siguiente").addEventListener("click", () => mostrar(actual + 1));
 
 // Flechas del teclado
 document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowLeft")  mostrar(actual - 1, slides);
-  if (e.key === "ArrowRight") mostrar(actual + 1, slides);
+  if (e.key === "ArrowLeft")  mostrar(actual - 1);
+  if (e.key === "ArrowRight") mostrar(actual + 1);
 });
 
 // Deslizar con el dedo en celular
@@ -103,26 +99,26 @@ const hero = document.querySelector(".hero");
 hero.addEventListener("touchstart", (e) => { inicioX = e.touches[0].clientX; }, { passive: true });
 hero.addEventListener("touchend", (e) => {
   const diferencia = e.changedTouches[0].clientX - inicioX;
-  if (Math.abs(diferencia) > 50) mostrar(actual + (diferencia < 0 ? 1 : -1), slides);
+  if (Math.abs(diferencia) > 50) mostrar(actual + (diferencia < 0 ? 1 : -1));
 });
 
-mostrar(0, slides);   // arranca con la primera criatura
+mostrar(0);   // arranca con la primera criatura
 
 /* ==
   INDICE CARRUSEL
 == */
 const esTouch = window.matchMedia('(hover: none)').matches;
 
-if (!esTouch) indiceGlifos.forEach((s, i) => s.addEventListener("mouseover", () => mostrar(i, indiceElements)))
+if (!esTouch) indiceGlifos.forEach((s, i) => s.addEventListener("mouseover", () => mostrar(i)))
 document.querySelector('.indice-links').addEventListener("click", () => window.location.href = `${CRIATURAS[actual].id}.html`)
 
-mostrar(0, indiceElements);
+mostrar(0);
 
 // para dispositivos touch, al dar click en glifos, solo te lleva a la página si es el activa
 indiceGlifos.forEach((s, i) => s.addEventListener("click", (e) => {
   console.log(esTouch)
   if (esTouch && !s.classList.contains('activa')) {
     e.preventDefault();
-    mostrar(i, indiceElements)
+    mostrar(i)
   }
 }))
