@@ -55,6 +55,8 @@ CRIATURAS.forEach((c) => {
 /* ============================================================
    6. LÓGICA DEL CARRUSEL
    ============================================================ */
+const esTouch = window.matchMedia('(hover: none)').matches;
+
 const slides = document.querySelectorAll(".slide");
 const indiceElements = document.querySelectorAll(".indice-elemento");
 const indiceGlifos = document.querySelectorAll(".indice-glifos a");
@@ -82,15 +84,72 @@ function mostrar(n) {
 }
 
 /* ==
-  CARRUSEL
+  CARRUSEL AUTOMATICO
+== */
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
+
+const IntervalTime = 4000;
+const TimeoutTime = 9000;
+
+let idInterval
+let idTimeout
+
+let onIndice = false
+
+function stopAuto () {
+  clearInterval(idInterval);
+  clearTimeout(idTimeout);
+}
+function startInterval () {
+  if (reducedMotion) return;
+
+  stopAuto();
+  idInterval = setInterval(() => mostrar(actual + 1), IntervalTime)
+}
+function startTimeout() {
+  clearTimeout(idTimeout);
+  idTimeout = setTimeout(() => startInterval(), TimeoutTime - IntervalTime)
+}
+
+function interactMostrar(n) {
+  mostrar(n);
+  if (onIndice) return;
+  if (reducedMotion) return;
+  stopAuto();
+  startTimeout();
+}
+
+function indiceMouseEntra(on) {
+  onIndice = on;
+  if (on) stopAuto();
+  if (!on) startTimeout();
+}
+
+startInterval();
+
+if (!esTouch) {
+  document.querySelector(".indice").addEventListener("mouseenter", () => indiceMouseEntra(true))
+  document.querySelector(".indice").addEventListener("mouseleave", () => indiceMouseEntra(false))
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    stopAuto();
+  } else if (!onIndice) {
+    startInterval();
+  }
+});
+
+/* ==
+  CARRUSEL HERO
 == */ 
-document.getElementById("anterior").addEventListener("click", () => mostrar(actual - 1));
-document.getElementById("siguiente").addEventListener("click", () => mostrar(actual + 1));
+document.getElementById("anterior").addEventListener("click", () => interactMostrar(actual - 1));
+document.getElementById("siguiente").addEventListener("click", () => interactMostrar(actual + 1));
 
 // Flechas del teclado
 document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowLeft")  mostrar(actual - 1);
-  if (e.key === "ArrowRight") mostrar(actual + 1);
+  if (e.key === "ArrowLeft")  interactMostrar(actual - 1);
+  if (e.key === "ArrowRight") interactMostrar(actual + 1);
 });
 
 // Deslizar con el dedo en celular
@@ -99,7 +158,7 @@ const hero = document.querySelector(".hero");
 hero.addEventListener("touchstart", (e) => { inicioX = e.touches[0].clientX; }, { passive: true });
 hero.addEventListener("touchend", (e) => {
   const diferencia = e.changedTouches[0].clientX - inicioX;
-  if (Math.abs(diferencia) > 50) mostrar(actual + (diferencia < 0 ? 1 : -1));
+  if (Math.abs(diferencia) > 50) interactMostrar(actual + (diferencia < 0 ? 1 : -1));
 });
 
 mostrar(0);   // arranca con la primera criatura
@@ -107,18 +166,15 @@ mostrar(0);   // arranca con la primera criatura
 /* ==
   INDICE CARRUSEL
 == */
-const esTouch = window.matchMedia('(hover: none)').matches;
 
-if (!esTouch) indiceGlifos.forEach((s, i) => s.addEventListener("mouseover", () => mostrar(i)))
+if (!esTouch) indiceGlifos.forEach((s, i) => s.addEventListener("mouseenter", () => mostrar(i)))
 document.querySelector('.indice-links').addEventListener("click", () => window.location.href = `${CRIATURAS[actual].id}.html`)
-
-mostrar(0);
 
 // para dispositivos touch, al dar click en glifos, solo te lleva a la página si es el activa
 indiceGlifos.forEach((s, i) => s.addEventListener("click", (e) => {
-  console.log(esTouch)
   if (esTouch && !s.classList.contains('activa')) {
     e.preventDefault();
-    mostrar(i)
+    interactMostrar(i)
   }
 }))
+
