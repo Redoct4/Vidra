@@ -232,7 +232,7 @@ h2 {
     scale: 0.9;
 
     /* desactivado y anim */
-    opacity: 30%;
+    opacity: 50%;
     transition: 
       opacity 0.15s,
       translate 0.15s,
@@ -314,7 +314,7 @@ h2 {
 
     font-size: calc(3.5vmin);
     font-style: italic;
-    opacity: 60%;
+    opacity: 70%;
 
     color: var(--nombre-color)
   }
@@ -332,7 +332,7 @@ h2 {
       display: block;
       text-align: center;
       width: 33%;
-      font-size: 1.1rem;
+      font-size: calc(2vmin);
       opacity: 60%;
 
       color:#fff;
