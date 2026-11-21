@@ -3,7 +3,7 @@
    copia un bloque { ... }, pégalo y cambia los datos.
    Los "—" son datos que me faltan: complétalos tú.
    ============================================================ */
-import { CRIATURAS } from "./datos";
+import { CRIATURAS } from "./datos.js";
 
 const creatureTitleSize = "10vw";
 
@@ -16,7 +16,7 @@ CRIATURAS.forEach((c) => {
   // Cada slide es un enlace a la página de la criatura (que crearás después)
   contSlides.insertAdjacentHTML("beforeend", `
     
-      <a class="slide" href="${c.id}.html" aria-label="Ver ${c.nombre}" style="--nombre-tamano: ${creatureTitleSize}; --nombre-color: ${c.nombreColor}">
+      <a class="slide" href="${c.id}.html" aria-label="Ver ${c.nombre}" style="--nombre-tamano: ${creatureTitleSize}; --nombre-color: ${c.color1L}">
       <span class="slide-nombre">${c.nombre.toUpperCase()}</span>
       <!-- CUANDO TENGAS LA IMAGEN: reemplaza el texto de abajo por
            <img src="img/${c.id}.webp" alt="Ilustración de ${c.nombre}"> -->
@@ -31,7 +31,7 @@ CRIATURAS.forEach((c) => {
 
   contIndiceMostrando.insertAdjacentHTML("beforeend", `
 
-    <a class="indice-elemento" href="${c.id}.html" aria-label="Ver ${c.nombre}" style=" --nombre-color: ${c.nombreColor}">
+    <a class="indice-elemento" href="${c.id}.html" aria-label="Ver ${c.nombre}" style="--nombre-color: ${c.color1L}; --secundario-color: ${c.color2L}">
       <p class="indice-titulo">${c.nombre}</p>
       <img src="img/${c.id}.webp">
       <p class="indice-cientifico">${c.cientifico}</p>
@@ -63,7 +63,7 @@ function mostrar(n) {
   indiceElements.forEach((s, i) => s.classList.toggle("activa", i === actual));
   indiceGlifos.forEach((s, i) => s.classList.toggle("activa", i === actual));
 
-  document.documentElement.style.setProperty("--brillo", CRIATURAS[actual].brillo);
+  document.documentElement.style.setProperty("--brillo", CRIATURAS[actual].color1L);
   const anterior  = (actual - 1 + CRIATURAS.length) % CRIATURAS.length;
   const siguiente = (actual + 1) % CRIATURAS.length;
   const imgsVecinas = document.querySelectorAll(".vecina img");

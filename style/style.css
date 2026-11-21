@@ -5,15 +5,13 @@
   --fondo: #0f060c;
   --fondo-claro: #2b1620;
   --planeta: #070d11;
-  --brillo: #e58a9b;
-  --magenta: #d4208f;
-  --verde: #6ee03a;
   --texto: #f3e9ee;
-  --texto-suave: #b9a5ae;
   --titulo: "Syncopate", sans-serif;
   --cuerpo: "Cardo", serif;
-  --nombre-color: #ffffff;
   --nombre-tamano: 13vw;
+
+  --nombre-color: rgb(255, 63, 63);
+  --secundario-color: rgb(255, 63, 63);
 }
 
 /* Reinicio básico: quita márgenes raros del navegador */
@@ -316,7 +314,7 @@ h2 {
     font-style: italic;
     opacity: 70%;
 
-    color: var(--nombre-color)
+    color: var(--secundario-color);
   }
 
   > .indice-datos {

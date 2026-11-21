@@ -1,8 +1,8 @@
 export const CRIATURAS = [
-  { id: "brassela",             nombre: "Brassela",             cientifico: "Pantacefalis bulbogena",           altura: "120 cm", peso: "30 kg",   region: "Karteos",       brillo: "#98db06", nombreColor: "#98db06ff"},
-  { id: "tortuga-baotilena",    nombre: "T. Baotilena",         cientifico: "Chelosidania bitelensis",          altura: "250 cm", peso: "6000 kg", region: "Guéfide",       brillo: "#ed9b33", nombreColor: "#ed9b33ff"},
-  { id: "drasque",              nombre: "Drasque",              cientifico: "Titanophaga resonans",             altura: "150 m",  peso: "890 T",   region: "Yxi",           brillo: "#da6ba3", nombreColor: "#da6ba3ff"},
-  { id: "neteapirio",           nombre: "Neteapirio",           cientifico: "Pereathoro laceon",                altura: "28 cm",  peso: "12 kg",   region: "Karteos, Yxi",  brillo: "#a487f0", nombreColor: "#a487f0ff"},
-  { id: "kantah",               nombre: "Kantah",               cientifico: "Echoalatus deceptrix",             altura: "250 cm", peso: "80 kg",   region: "Guéfide, Yxi",  brillo: "#3fd0e8", nombreColor: "#3fd0e8ff"},
-  { id: "vemufla",              nombre: "Vémufla",              cientifico: "Camoureflectere heliphostoris",    altura: "350 cm", peso: "1450 kg", region: "Guéfide",       brillo: "#9678d3", nombreColor: "#9678d3ff"}
+    { id: "brassela",             nombre: "Brassela",             cientifico: "Pantacefalis bulbogena",           altura: "120 cm", peso: "30 kg",   region: "Karteos",       color1L: "#98db06", color1D: "#056602", color2L: "#df3f99", color2D: "#5f091c"},
+    { id: "tortuga-baotilena",    nombre: "T. Baotilena",         cientifico: "Chelosidania bitelensis",          altura: "250 cm", peso: "6000 kg", region: "Guéfide",       color1L: "#ed9b33", color1D: "#788010", color2L: "#ec69db", color2D: "#641844"},
+    { id: "drasque",              nombre: "Drasque",              cientifico: "Titanophaga resonans",             altura: "150 m",  peso: "890 T",   region: "Yxi",           color1L: "#da6ba3", color1D: "#6d222c", color2L: "#4aaad6", color2D: "#1f3685"},
+    { id: "neteapirio",           nombre: "Neteapirio",           cientifico: "Pereathoro laceon",                altura: "28 cm",  peso: "12 kg",   region: "Karteos, Yxi",  color1L: "#a487f0", color1D: "#672c83", color2L: "#ee4e3f", color2D: "#83321a"},
+    { id: "kantah",               nombre: "Kantah",               cientifico: "Echoalatus deceptrix",             altura: "250 cm", peso: "80 kg",   region: "Guéfide, Yxi",  color1L: "#3fd0e8", color1D: "#102e70", color2L: "#e28154", color2D: "#74321e"},
+    { id: "vemufla",              nombre: "Vémufla",              cientifico: "Camoureflectere heliphostoris",    altura: "350 cm", peso: "1450 kg", region: "Guéfide",       color1L: "#f15252", color1D: "#923a24", color2L: "#b06af1", color2D: "#792d91"}
 ];
