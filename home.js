@@ -5,7 +5,12 @@
    ============================================================ */
 import { CRIATURAS } from "./datos.js";
 
+function $ (b) {return document.querySelector(b)};
+
 const creatureTitleSize = "10vw";
+
+document.body.style.setProperty('--alto-pagina', document.documentElement.scrollHeight + 'px');
+document.body.style.setProperty('--nombre-tamano', creatureTitleSize);
 
 const contSlides   = document.getElementById("slides");
 const contIndiceGlifos = document.getElementById("indice-glifos");
@@ -16,7 +21,7 @@ CRIATURAS.forEach((c) => {
   // Cada slide es un enlace a la página de la criatura (que crearás después)
   contSlides.insertAdjacentHTML("beforeend", `
     
-      <a class="slide" href="${c.id}.html" aria-label="Ver ${c.nombre}" style="--nombre-tamano: ${creatureTitleSize}; --nombre-color: ${c.color1L}">
+      <a class="slide" href="${c.id}.html" aria-label="Ver ${c.nombre}" style="--nombre-color: ${c.color1L}">
       <span class="slide-nombre">${c.nombre.toUpperCase()}</span>
       <!-- CUANDO TENGAS LA IMAGEN: reemplaza el texto de abajo por
            <img src="img/${c.id}.webp" alt="Ilustración de ${c.nombre}"> -->
@@ -69,8 +74,8 @@ function mostrar(n) {
   const imgsVecinas = document.querySelectorAll(".vecina img");
   imgsVecinas.forEach((img) => (img.style.opacity = 0));     // 1. se desvanecen
   setTimeout(() => {
-    document.querySelector("#anterior img").src  = `img/${CRIATURAS[anterior].id}.webp`;
-    document.querySelector("#siguiente img").src = `img/${CRIATURAS[siguiente].id}.webp`;
+    $("#anterior img").src  = `img/${CRIATURAS[anterior].id}.webp`;
+    $("#siguiente img").src = `img/${CRIATURAS[siguiente].id}.webp`;
     imgsVecinas.forEach((img) => (img.style.opacity = 1));   // 3. reaparecen
   }, 400);
   
@@ -121,8 +126,8 @@ function indiceMouseEntra(on) {
 startInterval();
 
 if (!esTouch) {
-  document.querySelector(".indice").addEventListener("mouseenter", () => indiceMouseEntra(true))
-  document.querySelector(".indice").addEventListener("mouseleave", () => indiceMouseEntra(false))
+  $(".indice").addEventListener("mouseenter", () => indiceMouseEntra(true))
+  $(".indice").addEventListener("mouseleave", () => indiceMouseEntra(false))
 }
 
 document.addEventListener('visibilitychange', () => {
@@ -147,7 +152,7 @@ document.addEventListener("keydown", (e) => {
 
 // Deslizar con el dedo en celular
 let inicioX = 0;
-const hero = document.querySelector(".hero");
+const hero = $(".hero");
 hero.addEventListener("touchstart", (e) => { inicioX = e.touches[0].clientX; }, { passive: true });
 hero.addEventListener("touchend", (e) => {
   const diferencia = e.changedTouches[0].clientX - inicioX;
@@ -161,12 +166,25 @@ mostrar(0);   // arranca con la primera criatura
 == */
 
 if (!esTouch) indiceGlifos.forEach((s, i) => s.addEventListener("mouseenter", () => mostrar(i)))
-document.querySelector('.indice-links').addEventListener("click", () => window.location.href = `${CRIATURAS[actual].id}.html`)
+$('.indice-links').addEventListener("click", () => window.location.href = `${CRIATURAS[actual].id}.html`)
 
 // para dispositivos touch, al dar click en glifos, solo te lleva a la página si es el activa
 indiceGlifos.forEach((s, i) => s.addEventListener("click", (e) => {
   if (esTouch && !s.classList.contains('activa')) {
     e.preventDefault();
-    interactMostrar(i)
-  }
+    interactMostrar(i);
+  } 
 }))
+
+/* OUT ANIM */
+
+document.querySelectorAll("a").forEach((s) => {
+    s.addEventListener("click", (e) => {
+        if (e.defaultPrevented) return;
+        e.preventDefault();
+        $("body").style.opacity = 0;
+        setTimeout(() => window.location.href = s.href, 350);
+    })
+})
+
+$("body").style.opacity = 1;

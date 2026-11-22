@@ -12,19 +12,29 @@
 
   --nombre-color: rgb(255, 63, 63);
   --secundario-color: rgb(255, 63, 63);
+
+  --alto-pagina: 5px;
 }
 
 /* Reinicio básico: quita márgenes raros del navegador */
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { overflow-x: clip;}
+
 html { 
   scroll-behavior: smooth; 
-  overflow-x: hidden;}
+}
 body {
+  position: relative;
+
   background: var(--fondo);
   color: var(--texto);
   font-family: var(--cuerpo);
   font-size: 1.15rem;
   line-height: 1;
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 
@@ -34,7 +44,6 @@ body {
 .hero {
   position: relative;
   height: 100vh;
-  min-height: 560px;
   z-index: 0;
   /* Estrellas hechas solo con CSS (varios puntos de luz) */
   background:
@@ -50,11 +59,15 @@ body {
 
 /* El planeta: un círculo enorme que solo asoma su parte de arriba */
 .planeta {
+  --grad-med: 10vmin;
+  --grad-big: 50vmin;
+  --grad-small: 5vmin;
+
   position: absolute;
   left: 50%;
-  bottom: -98vw;
-  width: 120vw;
-  height: 120vw;
+  top: 52vh;
+  width: calc(var(--alto-pagina) + 50vw);
+  height: calc(var(--alto-pagina) + 50vw);
   transform: translateX(-50%);
   border-radius: 100%;
   background: var(--planeta);
@@ -62,24 +75,24 @@ body {
   z-index: -1;
 
   box-shadow:
-    0 0 10vmin color-mix(in hsl increasing hue, var(--brillo) 90%, var(--fondo-claro) 10%),
-    0 0 50vmin -1vmax color-mix(in hsl increasing hue, var(--brillo) 90%, transparent 10%),
-    0 0 5vmin color-mix(in hsl increasing hue, var(--brillo) 40%, hsl(0, 100%, 85%) 60%);   
+    0 0 var(--grad-med) color-mix(in hsl increasing hue, var(--brillo) 90%, var(--fondo-claro) 10%),
+    0 0 var(--grad-big) -1vmax color-mix(in hsl increasing hue, var(--brillo) 90%, transparent 10%),
+    0 0 var(--grad-small) color-mix(in hsl increasing hue, var(--brillo) 40%, hsl(0, 100%, 85%) 60%);   
   filter: blur(5px);
 
 
-  transition: box-shadow 0.6s ease;
+  transition: box-shadow 0.6s ease, background 0.8s ease;
 }
 
 .hero-vidra {
-  --espaciado-letra: 3em;
+  --espaciado-letra: 5vw;
 
   position: absolute;
   bottom: 0.2em;
   width: 100%;
   text-align: center;
   font-family: var(--titulo);
-  font-size: clamp(1rem, 4vh, 4rem);
+  font-size: clamp(1rem, 3vh, 3rem);
   letter-spacing: var(--espaciado-letra);
   padding-left: var(--espaciado-letra);
   text-transform: lowercase;
@@ -107,12 +120,16 @@ body {
 
 .slide-nombre {
   position: absolute;
-  top: 0;
+  bottom: 75vh;
   width: 100%;
   text-align: center;
   font-family: var(--titulo);
   font-weight: 700;
+
+  padding-top: 0.5em;
+
   font-size: var(--nombre-tamano);
+
   background: linear-gradient(to bottom, var(--nombre-color), transparent);
   -webkit-background-clip: text;
   background-clip: text;
@@ -120,14 +137,13 @@ body {
   letter-spacing: 0.02em;
   transform: translateY(-20px);
   transition: transform 0.8s ease, color 0.8s ease;
-  padding-top: 2.4vw;
   text-indent: 0.02em;
 }
 .slide.activa .slide-nombre { transform: translateY(0); }
 
 /* Espacio de la criatura. Aquí irá tu ilustración (ver nota abajo) */
 .slide-imagen {
-  width: min(110vh, 100vw);
+  width: min(110vh, 60vw);
   aspect-ratio: 1;
   margin-top: 4vh;
   display: grid;
@@ -145,12 +161,15 @@ body {
 /* Vecinasas */
 .vecina {
   position: absolute;
-  bottom: 12vh;             /* qué tan abajo van */
+  bottom: 10vh;             /* qué tan abajo van */
   z-index: 4;               /* por encima de las slides, para poder hacer clic */
   width: 18vw;              /* tamaño de la vecina */
   background: none;         /* quita el fondo gris del botón */
   border: none;
   cursor: pointer;
+
+  display: flex;
+  justify-content: end;
 }
 .vecina img {
   display: block;
@@ -160,8 +179,14 @@ body {
 }
 .vecina:hover img,
 .vecina:focus-visible img { filter: brightness(0.6); }
-.vecina.izq { left: 8vw; }
-.vecina.der { right: 8vw; }
+.vecina.izq { 
+  left: 7vw; 
+  align-items: start;
+}
+.vecina.der { 
+  right: 7vw;
+  align-items: end;
+}
 
 /* ============================================================
    3. SECCIONES DE ABAJO
@@ -173,21 +198,86 @@ body {
   z-index: 1;
 }
 
-section.contenido {
+section.contenido, div.contenido {
   max-width: 1100px;
   margin: 0 auto;
   padding: 6rem 1.5rem;
 }
+
 h2 {
   font-family: var(--titulo);
   font-size: clamp(1.4rem, 4vw, 2.4rem);
   margin-bottom: 2rem;
 }
-.planeta-texto { max-width: 62ch; color: var(--texto-suave); }
+
+.scrollytelling {
+  height: 250vh;
+  margin-top: 20vh;
+}
+
+#planeta {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding-top: 10vh;
+
+  background: 
+    radial-gradient(1.5px 1.5px at 12% 20%, #fff, transparent),
+    radial-gradient(2px 2px at 30% 55%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 55% 12%, #fff, transparent),
+    radial-gradient(1px 1px at 72% 40%, #fff, transparent),
+    radial-gradient(2px 2px at 88% 22%, #fff, transparent),
+    radial-gradient(1px 1px at 20% 80%, #fff, transparent),
+    radial-gradient(1px 1px at 92% 70%, #fff, transparent),
+    radial-gradient(2px 2px at 5% 85%, #fff, transparent),
+    radial-gradient(1px 1px at 40% 5%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 90% 95%, #fff, transparent),
+    transparent;
+
+  p, h2 {
+    color: var(--planeta)
+  }
+}
+
+@keyframes progreso {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+.mini.planeta {
+  --grad-big: 15vmin;
+  --grad-med: 7vmin;
+  --grad-small: 1vmin;
+
+  background-color: color-mix(in srgb, var(--brillo) 70%, var(--fondo) 30%);
+
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+
+  width: calc(1.15rem * 28);
+  height: calc(1.15rem * 28);
+  aspect-ratio: 1;
+
+  animation: progreso linear;
+  animation-range: 50vh 150vh;
+  animation-timeline: scroll(root block);
+  animation-fill-mode: both;
+}
+
+.planeta-texto { max-width: 40ch; color: var(--texto-suave); }
 .planeta-texto p + p { margin-top: 1.2rem; }
 
+#indice {
+  margin-top: 30vh;
+}
 .indice {
-  margin-top: 5rem;
+  margin-top: 1vmin;
   position: relative;
   display: flex;
   flex-direction: row;
@@ -353,36 +443,23 @@ h2 {
     opacity: 1;
     @starting-style { transform: translateY(-5vh); opacity: 0; }
   }
+}
 
+#Creditos{
+  position: absolute;
+
+  padding: 1em;
+  padding-top: 0;
+  top: calc(52vh + var(--alto-pagina) + 50vw + 10vmin);
+
+  width: 100vw;
   
-}
 
-.tarjeta {
-  display: block;
-  padding: 1.5rem;
-  background: var(--fondo-claro);
-  border-left: 4px solid var(--magenta);
-  color: inherit;
-  text-decoration: none;
-  transition: transform 0.25s, border-color 0.25s;
-.tarjeta-cabecera {
-  display: flex;          /* pone ícono y texto en fila */
-  align-items: center;    /* los centra verticalmente */
-  gap: 1rem;              /* espacio entre ellos */
-  margin-bottom: 1rem;    /* separación con los datos de abajo */
+  font-family: "Syncopate", sans-serif;
+  text-align: center;
+  font-size: 1rem;
+  background-color: transparent;
 }
-.tarjeta-icono {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;    /* que no se deforme */
-  flex-shrink: 0;         /* que no se aplaste si falta espacio */
-}
-}
-.tarjeta:hover, .tarjeta:focus-visible { transform: translateY(-4px); border-color: var(--verde); }
-.tarjeta h3 { font-family: var(--titulo); font-size: 1.1rem; }
-.tarjeta em { display: block; margin: 0.3rem 0 1rem; color: var(--texto-suave); }
-.tarjeta dl { display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 1rem; font-size: 0.95rem; }
-.tarjeta dt { color: var(--texto-suave); }
 
 /* Respeta a quien pide menos movimiento en su dispositivo */
 @media (prefers-reduced-motion: reduce) {
@@ -392,18 +469,12 @@ h2 {
 /* ============================================================
    4. AJUSTES PARA CELULAR (pantallas de menos de 700px)
    ============================================================ */
-@media (max-width: 700px) {
-  .vecina { width: 28vw; bottom: 16vh; }
-  .vecina.izq { left: -8vw; }
-  .vecina.der { right: -8vw; }
-  .slide-nombre {
-    font-size: calc(var(--nombre-tamano) * 0.9);
-  }
-  .hero-vidra {
-    font-size: 2rem;
-    letter-spacing: 0.35em;
-    text-indent: 0.35em;
-  }
+@media (orientation: portrait) {
+  .slide-imagen{width: 100vw;}
+  .vecina { width: 28vw; bottom: 16vh; > img {filter: brightness(0.5);} }
+  .vecina img:hover{filter: brightness(0.5);}
+  .vecina.izq { left: 2vw; }
+  .vecina.der { right: 2vw; }
   .indice-glifos {
     --interactive-margin: 0vw;
     > a.activa {
@@ -411,12 +482,9 @@ h2 {
     }
   }
 }
-    #Creditos{
-        padding: 0.9rem;
-        margin: 1rem 0;
-        margin-bottom: 0;
-        font-family: "Syncopate", sans-serif;
-        text-align: center;
-        font-size: small;
-        background-color: #121c24;
-    }
+
+@media (max-width: 700px) {
+  #Creditos{
+    font-size: 0.5rem;
+  }
+}
