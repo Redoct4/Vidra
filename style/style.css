@@ -14,6 +14,7 @@
   --secundario-color: rgb(255, 63, 63);
 
   --alto-pagina: 5px;
+  --top-planeta: 60vh;
 }
 
 /* Reinicio básico: quita márgenes raros del navegador */
@@ -65,8 +66,8 @@ body {
 
   position: absolute;
   left: 50%;
-  top: 52vh;
-  width: calc(var(--alto-pagina) + 50vw);
+  top: var(--top-planeta);
+  width: calc(var(--alto-pagina) + 10vw);
   height: calc(var(--alto-pagina) + 50vw);
   transform: translateX(-50%);
   border-radius: 100%;
@@ -211,7 +212,7 @@ h2 {
 }
 
 .scrollytelling {
-  height: 250vh;
+  height: 350vh;
   margin-top: 20vh;
 }
 
@@ -244,9 +245,13 @@ h2 {
   }
 }
 
-@keyframes progreso {
-  from { transform: scale(0); }
-  to   { transform: scale(1); }
+@keyframes pulsar {
+  0%   { transform: scale(0); }
+  30%  { transform: scale(1); }
+  45%  { transform: scale(0.85); }
+  60%  { transform: scale(1); }
+  85% { transform: scale(0.85); }
+  100% { transform: scale(1); }
 }
 .mini.planeta {
   --grad-big: 15vmin;
@@ -264,9 +269,10 @@ h2 {
   height: calc(1.15rem * 28);
   aspect-ratio: 1;
 
-  animation: progreso linear;
-  animation-range: 50vh 150vh;
+  animation: pulsar ease-in-out;
+  animation-range: 50vh 400vh;
   animation-timeline: scroll(root block);
+
   animation-fill-mode: both;
 }
 
@@ -450,7 +456,7 @@ h2 {
 
   padding: 1em;
   padding-top: 0;
-  top: calc(52vh + var(--alto-pagina) + 50vw + 10vmin);
+  top: calc(var(--top-planeta) + var(--alto-pagina) + 50vw + 15vmin);
 
   width: 100vw;
   
