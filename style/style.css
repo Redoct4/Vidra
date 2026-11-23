@@ -14,7 +14,7 @@
   --secundario-color: rgb(255, 63, 63);
 
   --alto-pagina: 5px;
-  --top-planeta: 60vh;
+  --top-planeta: 60dvh;
 }
 
 /* Reinicio básico: quita márgenes raros del navegador */
@@ -44,7 +44,7 @@ body {
    ============================================================ */
 .hero {
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   z-index: 0;
   /* Estrellas hechas solo con CSS (varios puntos de luz) */
   background:
@@ -56,6 +56,8 @@ body {
     radial-gradient(1px 1px at 20% 80%, #fff, transparent),
     radial-gradient(1px 1px at 92% 70%, #fff, transparent),
     transparent;
+
+  transition: height 0.5s ease;
 }
 
 /* El planeta: un círculo enorme que solo asoma su parte de arriba */
@@ -82,7 +84,7 @@ body {
   filter: blur(5px);
 
 
-  transition: box-shadow 0.6s ease, background 0.8s ease;
+  transition: box-shadow 0.6s ease, background 0.8s ease, top 0.5s ease;
 }
 
 .hero-vidra {
@@ -121,7 +123,7 @@ body {
 
 .slide-nombre {
   position: absolute;
-  bottom: 75vh;
+  bottom: 75dvh;
   width: 100%;
   text-align: center;
   font-family: var(--titulo);
@@ -139,14 +141,16 @@ body {
   transform: translateY(-20px);
   transition: transform 0.8s ease, color 0.8s ease;
   text-indent: 0.02em;
+
+  transition: bottom 0.5s ease;
 }
 .slide.activa .slide-nombre { transform: translateY(0); }
 
 /* Espacio de la criatura. Aquí irá tu ilustración (ver nota abajo) */
 .slide-imagen {
-  width: min(110vh, 60vw);
+  width: min(110dvh, 60vw);
   aspect-ratio: 1;
-  margin-top: 4vh;
+  margin-top: 4dvh;
   display: grid;
   place-items: center;
   text-align: center;
@@ -154,6 +158,8 @@ body {
   color: var(--texto-suave);
   transform: scale(0.92);
   transition: transform 0.8s ease;
+
+  transition: width 0.5s ease, margin-top 0.5s ease;
 }
 .slide.activa .slide-imagen { transform: scale(1); }
 /* Cuando uses <img>, se ajusta solita al espacio: */
@@ -212,20 +218,20 @@ h2 {
 }
 
 .scrollytelling {
-  height: 350vh;
+  height: 350lvh;
   margin-top: 20vh;
 }
 
 #planeta {
   position: sticky;
   top: 0;
-  height: 100vh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  padding-top: 10vh;
+  padding-top: 10svh;
 
   background: 
     radial-gradient(1.5px 1.5px at 12% 20%, #fff, transparent),
@@ -269,9 +275,9 @@ h2 {
   height: calc(1.15rem * 28);
   aspect-ratio: 1;
 
-  /* animation: pulsar ease-in-out;
-  animation-range: 50vh 400vh;
-  animation-timeline: scroll(root block); */
+  animation: pulsar ease-in-out;
+  animation-range: 50lvh 400lvh;
+  animation-timeline: scroll(root block);
 
   animation-fill-mode: both;
 }
@@ -319,8 +325,8 @@ h2 {
     border: none;
     display:flex;
     flex-shrink: 1;
-    padding: 2.5vh 0;
-    margin-bottom: -1vh;
+    padding: 2.5svh 0;
+    margin-bottom: -1svh;
 
     transform-origin: left center;
     scale: 0.9;
@@ -480,7 +486,7 @@ h2 {
     justify-content: space-between;
   }
   .slide-imagen{width: 100vw;}
-  .vecina { width: 28vw; bottom: 16vh; > img {filter: brightness(0.5);} }
+  .vecina { width: 28vw; bottom: 16svh; > img {filter: brightness(0.5);} }
   .vecina img:hover{filter: brightness(0.5);}
   .vecina.izq { left: 2vw; }
   .vecina.der { right: 2vw; }
