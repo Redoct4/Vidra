@@ -20,7 +20,7 @@
 /* Reinicio básico: quita márgenes raros del navegador */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* html, body { overflow-x: clip;} */
+html, body { overflow-x: clip;}
 
 html { 
   scroll-behavior: smooth; 
@@ -68,7 +68,7 @@ body {
   left: 50%;
   top: var(--top-planeta);
   width: calc(var(--alto-pagina) + 10vw);
-  height: calc(var(--alto-pagina) + 40vh);
+  height: calc(var(--alto-pagina) + 30vh);
   transform: translateX(-50%);
   border-radius: 100%;
   background: var(--planeta);
@@ -457,7 +457,7 @@ h2 {
 
   padding: 1em;
   padding-top: 0;
-  top: calc(var(--top-planeta) + var(--alto-pagina) + 40vh + 15vmin);
+  top: calc(var(--top-planeta) + var(--alto-pagina) + 30vh + 15vmin);
 
   width: 100vw;
   
