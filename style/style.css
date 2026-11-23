@@ -144,7 +144,7 @@ body {
 
 /* Espacio de la criatura. Aquí irá tu ilustración (ver nota abajo) */
 .slide-imagen {
-  width: min(110dvh, 60vw);
+  width: min(110svh, 60vw);
   aspect-ratio: 1;
   margin-top: 4svh;
   display: grid;
@@ -248,10 +248,10 @@ h2 {
 
 @keyframes pulsar {
   0%   { transform: scale(0); }
-  30%  { transform: scale(1); }
-  45%  { transform: scale(0.85); }
-  60%  { transform: scale(1); }
-  85% { transform: scale(0.85); }
+  30%  { transform: scale(1.15); }
+  45%  { transform: scale(0.95); }
+  60%  { transform: scale(1.15); }
+  85% { transform: scale(0.95); }
   100% { transform: scale(1); }
 }
 .mini.planeta {
