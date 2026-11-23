@@ -14,7 +14,7 @@
   --secundario-color: rgb(255, 63, 63);
 
   --alto-pagina: 5px;
-  --top-planeta: 60dvh;
+  --top-planeta: 60svh;
 }
 
 /* Reinicio básico: quita márgenes raros del navegador */
@@ -44,7 +44,7 @@ body {
    ============================================================ */
 .hero {
   position: relative;
-  height: 100dvh;
+  height: 100svh;
   z-index: 0;
   /* Estrellas hechas solo con CSS (varios puntos de luz) */
   background:
@@ -56,8 +56,6 @@ body {
     radial-gradient(1px 1px at 20% 80%, #fff, transparent),
     radial-gradient(1px 1px at 92% 70%, #fff, transparent),
     transparent;
-
-  transition: height 0.5s ease;
 }
 
 /* El planeta: un círculo enorme que solo asoma su parte de arriba */
@@ -70,7 +68,7 @@ body {
   left: 50%;
   top: var(--top-planeta);
   width: calc(var(--alto-pagina) + 10vw);
-  height: calc(var(--alto-pagina) + 50vw);
+  height: calc(var(--alto-pagina) + 40vh);
   transform: translateX(-50%);
   border-radius: 100%;
   background: var(--planeta);
@@ -123,7 +121,7 @@ body {
 
 .slide-nombre {
   position: absolute;
-  bottom: 75dvh;
+  bottom: 75svh;
   width: 100%;
   text-align: center;
   font-family: var(--titulo);
@@ -141,8 +139,6 @@ body {
   transform: translateY(-20px);
   transition: transform 0.8s ease, color 0.8s ease;
   text-indent: 0.02em;
-
-  transition: bottom 0.5s ease;
 }
 .slide.activa .slide-nombre { transform: translateY(0); }
 
@@ -150,7 +146,7 @@ body {
 .slide-imagen {
   width: min(110dvh, 60vw);
   aspect-ratio: 1;
-  margin-top: 4dvh;
+  margin-top: 4svh;
   display: grid;
   place-items: center;
   text-align: center;
@@ -159,7 +155,7 @@ body {
   transform: scale(0.92);
   transition: transform 0.8s ease;
 
-  transition: width 0.5s ease, margin-top 0.5s ease;
+  transition: width 0.5s ease;
 }
 .slide.activa .slide-imagen { transform: scale(1); }
 /* Cuando uses <img>, se ajusta solita al espacio: */
@@ -218,7 +214,7 @@ h2 {
 }
 
 .scrollytelling {
-  height: 350lvh;
+  height: 350svh;
   margin-top: 20vh;
 }
 
@@ -276,7 +272,7 @@ h2 {
   aspect-ratio: 1;
 
   animation: pulsar ease-in-out;
-  animation-range: 50lvh 400lvh;
+  animation-range: 50svh 400svh;
   animation-timeline: scroll(root block);
 
   animation-fill-mode: both;
@@ -462,7 +458,7 @@ h2 {
 
   padding: 1em;
   padding-top: 0;
-  top: calc(var(--top-planeta) + var(--alto-pagina) + 50vw + 15vmin);
+  top: calc(var(--top-planeta) + var(--alto-pagina) + 40vh + 15vmin);
 
   width: 100vw;
   
