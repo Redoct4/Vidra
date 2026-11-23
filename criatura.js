@@ -93,9 +93,9 @@ intro.addEventListener("touchend", (e) => {
   const diferencia = e.changedTouches[0].clientX - inicioX;
   if (Math.abs(diferencia) > 50) {
     if (diferencia < 0) {
-        window.location.href = `${criaturaNext}.html`
+        window.location.href = `${criaturaNext.id}.html`
     } else {
-        window.location.href = `${criaturaPrev}.html`
+        window.location.href = `${criaturaPrev.id}.html`
     }
   }
 });
