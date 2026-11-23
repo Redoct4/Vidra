@@ -78,3 +78,10 @@ document.querySelectorAll("a").forEach((s) => {
 })
 
 $("body").style.opacity = 1;
+
+// PARA QUE SE MUEVA EL ICONO
+function revisar() {
+  $('.Nav .icon').classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.05);
+}
+window.addEventListener('scroll', revisar, { passive: true });
+revisar();   // una vez al cargar

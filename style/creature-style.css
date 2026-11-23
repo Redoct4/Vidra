@@ -400,6 +400,16 @@ body {
     .Nav .NavegacionBarra {
         display: none;
     }
+    .Nav {
+        .icon {
+            top: var(--Nav-height);
+
+            transition: top 0.2s ease;
+        }
+        .icon.scrolled {
+            top: 0;
+        }
+    }
 
     .criaprev, .crianext{
         > span {
