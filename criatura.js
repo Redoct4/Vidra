@@ -85,3 +85,19 @@ function revisar() {
 }
 window.addEventListener('scroll', revisar, { passive: true });
 revisar();   // una vez al cargar
+
+
+// Deslizar con el dedo en celular
+let inicioX = 0;
+const intro = $(".intro");
+intro.addEventListener("touchstart", (e) => { inicioX = e.touches[0].clientX; }, { passive: true });
+intro.addEventListener("touchend", (e) => {
+  const diferencia = e.changedTouches[0].clientX - inicioX;
+  if (Math.abs(diferencia) > 50) {
+    if (diferencia < 0) {
+        window.location.href = `${criaturaNext}.html`
+    } else {
+        window.location.href = `${criaturaPrev}.html`
+    }
+  }
+});

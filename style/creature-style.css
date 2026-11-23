@@ -124,7 +124,7 @@ body {
 
     color:  var(--Creature-color); 
     text-align: center;
-    margin: 4vmin 0.6vmin 0;
+    margin: 0.5em 0.6vmin 0;
     padding-top: 1vmin; 
     position: relative; 
     isolation: isolate;
@@ -337,11 +337,15 @@ body {
     align-items: end;
     position: relative;
     gap: 0;
+
     height: 6vmin;
+    min-height: 35px;
 
     a {
         height: 100%;
         width: 10vmin;
+        min-width: 50px;
+
         display: flex;
         align-items: end;
         justify-content: center;
