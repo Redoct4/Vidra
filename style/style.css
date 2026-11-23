@@ -31,7 +31,7 @@ body {
   background: var(--fondo);
   color: var(--texto);
   font-family: var(--cuerpo);
-  font-size: 1.15rem;
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
   line-height: 1;
 
   opacity: 0;
@@ -209,7 +209,7 @@ section.contenido, div.contenido {
 
 h2 {
   font-family: var(--titulo);
-  font-size: clamp(1.4rem, 4vw, 3em);
+  font-size: clamp(1.4rem, 4vw, 3rem);
   margin-bottom: 2rem;
 }
 
@@ -227,7 +227,6 @@ h2 {
   align-items: center;
   justify-content: center;
 
-  padding-top: 10svh;
 
   background: 
     radial-gradient(1.5px 1.5px at 12% 20%, #fff, transparent),
