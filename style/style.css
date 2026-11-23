@@ -263,18 +263,20 @@ h2 {
 
   top: 50%;
   left: 50%;
-  translate: -50% -50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
   z-index: -1;
 
   width: calc(1.15rem * 28);
   height: calc(1.15rem * 28);
   aspect-ratio: 1;
 
-  animation: pulsar ease-in-out;
+  /* animation: pulsar ease-in-out;
   animation-range: 50svh 400svh;
-  animation-timeline: scroll(root block);
-
-  animation-fill-mode: both;
+  animation-timeline: scroll(root block); 
+  animation-fill-mode: both; */
+  
+  scale: var(--escala, 0.6);
 }
 
 .planeta-texto { max-width: 40ch; color: var(--texto-suave); }
