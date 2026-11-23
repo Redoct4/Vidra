@@ -221,7 +221,7 @@ h2 {
 #planeta {
   position: sticky;
   top: 0;
-  height: 100svh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
