@@ -302,8 +302,12 @@ body {
 }
 
 .containerSec1, .containerSec2{
-    max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem;
-    line-height: 1.5; text-align: left;
+    max-width: 
+    1200px; 
+    margin: 2rem auto; 
+    padding: 0 1.5rem;
+    line-height: 1.5; 
+    text-align: left;
     display: flow-root;
 }
 
@@ -424,6 +428,10 @@ body {
             width: 10vmin;
         }
         
+    }
+
+    .containerSec1 br, .containerSec2 br {
+        display: none;
     }
 
     .bocetoizq{

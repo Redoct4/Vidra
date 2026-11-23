@@ -188,4 +188,6 @@ document.querySelectorAll("a").forEach((s) => {
 })
 
 
-$("body").style.opacity = 1;
+window.addEventListener("pageshow", () => {
+  $("body").style.opacity = 1;
+});

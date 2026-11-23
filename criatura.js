@@ -77,8 +77,6 @@ document.querySelectorAll("a").forEach((s) => {
     })
 })
 
-$("body").style.opacity = 1;
-
 // PARA QUE SE MUEVA EL ICONO
 function revisar() {
   $('.Nav .icon').classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.05);
@@ -100,4 +98,8 @@ intro.addEventListener("touchend", (e) => {
         window.location.href = `${criaturaPrev}.html`
     }
   }
+});
+
+window.addEventListener("pageshow", () => {
+  $("body").style.opacity = 1;
 });
