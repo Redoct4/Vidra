@@ -207,7 +207,7 @@ section.contenido, div.contenido {
 
 h2 {
   font-family: var(--titulo);
-  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  font-size: clamp(1.4rem, 4vw, 3em);
   margin-bottom: 2rem;
 }
 
@@ -259,8 +259,6 @@ h2 {
   --grad-small: 1vmin;
 
   background-color: color-mix(in srgb, var(--brillo) 70%, var(--fondo) 30%);
-  filter: none;
-  box-shadow: none;
 
   top: 50%;
   left: 50%;
@@ -271,9 +269,9 @@ h2 {
   height: calc(1.15rem * 28);
   aspect-ratio: 1;
 
-  animation: pulsar ease-in-out;
+  /* animation: pulsar ease-in-out;
   animation-range: 50vh 400vh;
-  animation-timeline: scroll(root block);
+  animation-timeline: scroll(root block); */
 
   animation-fill-mode: both;
 }
@@ -289,7 +287,7 @@ h2 {
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 }
 .indice-links {
   position: absolute;
@@ -478,6 +476,9 @@ h2 {
    4. AJUSTES PARA CELULAR (pantallas de menos de 700px)
    ============================================================ */
 @media (orientation: portrait) {
+  .indice {
+    justify-content: space-between;
+  }
   .slide-imagen{width: 100vw;}
   .vecina { width: 28vw; bottom: 16vh; > img {filter: brightness(0.5);} }
   .vecina img:hover{filter: brightness(0.5);}
