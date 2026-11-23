@@ -259,6 +259,8 @@ h2 {
   --grad-small: 1vmin;
 
   background-color: color-mix(in srgb, var(--brillo) 70%, var(--fondo) 30%);
+  filter: none;
+  box-shadow: none;
 
   top: 50%;
   left: 50%;
