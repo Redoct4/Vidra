@@ -31,7 +31,7 @@ body {
   background: var(--fondo);
   color: var(--texto);
   font-family: var(--cuerpo);
-  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   line-height: 1;
 
   opacity: 0;
@@ -153,9 +153,8 @@ body {
   font-size: 0.95rem;
   color: var(--texto-suave);
   transform: scale(0.92);
-  transition: transform 0.8s ease;
 
-  transition: width 0.5s ease;
+  transition: transform 0.8s ease, width 0.5s ease;
 }
 .slide.activa .slide-imagen { transform: scale(1); }
 /* Cuando uses <img>, se ajusta solita al espacio: */
@@ -248,10 +247,10 @@ h2 {
 
 @keyframes pulsar {
   0%   { transform: scale(0); }
-  30%  { transform: scale(1.15); }
-  45%  { transform: scale(0.95); }
-  60%  { transform: scale(1.15); }
-  85% { transform: scale(0.95); }
+  30%  { transform: scale(1.1); }
+  45%  { transform: scale(0.9); }
+  60%  { transform: scale(1.1); }
+  85% { transform: scale(0.9); }
   100% { transform: scale(1); }
 }
 .mini.planeta {
