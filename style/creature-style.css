@@ -160,13 +160,11 @@ body {
 }
 .intro .creature-data {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 1vmin;
+    margin: 0 auto 1vmin auto;
 
-    justify-self: center;
-
-    width: clamp(10rem, 15vw, 80vw);
+    width: clamp(10rem, 20vw, 80vw);
 
     > h5 {
         display: block;
@@ -234,10 +232,9 @@ body {
     justify-content: space-between;
     align-items: center; 
 
-    justify-self: center;
     width: 70vw;
 
-    margin: 1.5rem 0 0; 
+    margin: 1.5rem auto 0 auto; 
 }
 
 .criaprev, .crianext{
