@@ -221,7 +221,7 @@ h2 {
 #planeta {
   position: sticky;
   top: 0;
-  height: 100dvh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -244,8 +244,6 @@ h2 {
   p, h2 {
     color: var(--planeta)
   }
-
-  transition: height 0.3s ease;
 }
 
 @keyframes pulsar {
@@ -273,10 +271,10 @@ h2 {
   height: calc(1.15rem * 28);
   aspect-ratio: 1;
 
-  /* animation: pulsar ease-in-out;
+  animation: pulsar ease-in-out;
   animation-range: 50svh 400svh;
   animation-timeline: scroll(root block); 
-  animation-fill-mode: both; */
+  animation-fill-mode: both;
   
   scale: var(--escala, 0.6);
 }

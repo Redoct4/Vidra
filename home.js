@@ -187,43 +187,5 @@ document.querySelectorAll("a").forEach((s) => {
     })
 })
 
-/* ==
-  SCROLLYTELLING DEL PLANETA
-== */
-const tramo = $(".scrollytelling");
-const miniPlaneta = $(".mini.planeta");
-
-const CICLOS = 2;          // cuántas veces crece y encoge
-const ESCALA_MIN = 0.6;
-const ESCALA_MAX = 1;
-
-function actualizarPlaneta() {
-  const rect = tramo.getBoundingClientRect();
-  const recorrido = Math.max(rect.height - document.documentElement.clientHeight, 1);
-  const progreso = Math.min(Math.max(-rect.top / recorrido, 0), 1);   // 0 a 1
-
-  // 0.5 - 0.5·cos(...) arranca en el mínimo y sube y baja CICLOS veces
-  const pulso = 0.5 - 0.5 * Math.cos(progreso * Math.PI * 2 * CICLOS);
-  const escala = ESCALA_MIN + (ESCALA_MAX - ESCALA_MIN) * pulso;
-
-  miniPlaneta.style.setProperty("--escala", escala);
-}
-
-if (!reducedMotion) {      // ya la tienes definida arriba
-  let pendiente = false;
-  const alScroll = () => {
-    if (pendiente) return;
-    pendiente = true;
-    requestAnimationFrame(() => {
-      actualizarPlaneta();
-      pendiente = false;
-    });
-  };
-  window.addEventListener("scroll", alScroll, { passive: true });
-  window.addEventListener("resize", alScroll);
-  actualizarPlaneta();
-} else {
-  miniPlaneta.style.setProperty("--escala", ESCALA_MAX);
-}
 
 $("body").style.opacity = 1;
