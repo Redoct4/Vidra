@@ -6,6 +6,7 @@
 import { CRIATURAS } from "./datos.js";
 
 function $ (b) {return document.querySelector(b)};
+function a (b) {return document.querySelectorAll(b)};
 
 const creatureTitleSize = "10vw";
 
@@ -23,8 +24,6 @@ CRIATURAS.forEach((c) => {
     
       <a class="slide" href="${c.id}.html" aria-label="Ver ${c.nombre}" style="--nombre-color: ${c.color1L}">
       <span class="slide-nombre">${c.nombre.toUpperCase()}</span>
-      <!-- CUANDO TENGAS LA IMAGEN: reemplaza el texto de abajo por
-           <img src="img/${c.id}.webp" alt="Ilustración de ${c.nombre}"> -->
       <div class="slide-imagen"><img src="img/${c.id}.webp" alt="Ilustración de ${c.nombre}"></div>
     </a>`);
 
@@ -160,6 +159,43 @@ hero.addEventListener("touchend", (e) => {
 });
 
 mostrar(0);   // arranca con la primera criatura
+
+/* =====
+  EFECTO CARD TILT
+===== */
+
+function tiltCard (img, e) {
+  const r = e.currentTarget.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width  - 0.5;   // -0.5 (izq) a 0.5 (der)
+  const y = (e.clientY - r.top)  / r.height - 0.5;   // -0.5 (arriba) a 0.5 (abajo)
+
+  const mult = 30
+  
+  img.style.setProperty('--ry', x * mult + 'deg');
+  img.style.setProperty('--rx', -y * mult + 'deg');
+}
+function tiltCardRestore (img) {
+  img.style.setProperty('transition', 'transform 0.3s ease, scale 0.5s ease, filter 0.2s ease');
+
+  img.style.setProperty('--ry', 0);
+  img.style.setProperty('--rx', 0);
+}
+
+a(".slide-imagen").forEach(s => {
+  const img = s.querySelector("img");
+  s.addEventListener("pointerenter", (e) => {
+    indiceMouseEntra(true)
+    img.style.setProperty('transition', 'transform 0.1s ease, scale 0.3s ease, filter 0.45s ease');
+  })
+  s.addEventListener("pointermove", (e) => {
+    tiltCard(img, e);
+  })
+  s.addEventListener("pointerleave", () => {
+    indiceMouseEntra(false)
+    tiltCardRestore(img);
+  })
+});
+
 
 /* ==
   INDICE CARRUSEL
