@@ -218,7 +218,7 @@ indiceGlifos.forEach((s, i) => s.addEventListener("click", (e) => {
 
 const AUTORES = [
   { id: "karel",  seudonimo: "papiwabisabi",  completo: "Karel Leonardo Gayoso",  instagram: "https://www.instagram.com/papiwabisabi/",   criaturaA: "brassela",            criaturaB: "kantah"},
-  { id: "vic",    seudonimo: "zappifreeze",   completo: "Adán Víctor Bazán",      instagram: "https://www.instagram.com/zappifreeze.0/",  criaturaA: "tortuga-baotilena",   criaturaB: "neteapirio" },
+  { id: "vic",    seudonimo: "zappifreeze",   completo: "Víctor Adán Bazán",      instagram: "https://www.instagram.com/zappifreeze.0/",  criaturaA: "tortuga-baotilena",   criaturaB: "neteapirio" },
   { id: "aldo",   seudonimo: "aldo lm",       completo: "Aldo López Malo",        instagram: "https://www.instagram.com/almm_drawings/",  criaturaA: "vemufla",             criaturaB: "drasque"  }
 ];
 
