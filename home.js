@@ -176,6 +176,43 @@ indiceGlifos.forEach((s, i) => s.addEventListener("click", (e) => {
   } 
 }))
 
+/* ==============================
+  CONTACTO
+=================================== */
+
+const AUTORES = [
+  { id: "karel",  seudonimo: "papiwabisabi",  completo: "Karel Leonardo Gayoso",  instagram: "https://www.instagram.com/papiwabisabi/",   criaturaA: "brassela",            criaturaB: "kantah"},
+  { id: "vic",    seudonimo: "zappifreeze",   completo: "Adán Víctor Bazán",      instagram: "https://www.instagram.com/zappifreeze.0/",  criaturaA: "tortuga-baotilena",   criaturaB: "neteapirio" },
+  { id: "aldo",   seudonimo: "aldo lm",       completo: "Aldo López Malo",        instagram: "https://www.instagram.com/almm_drawings/",  criaturaA: "vemufla",             criaturaB: "drasque"  }
+];
+
+function extraerUsuarioInstagram(urlStr) {
+      try {
+        const url = new URL(urlStr);
+        const partes = url.pathname.split("/").filter(Boolean);
+        // Toma el primer segmento de ruta como nombre de usuario
+        return partes[0] ? partes[0].replace(/^@/, "") : null;
+      } catch {
+        return null;
+      }
+    }
+
+$('.autores').replaceChildren()
+AUTORES.forEach(s => {
+  const CriaturaA = CRIATURAS.find(c => c.id === s.criaturaA);
+  const CriaturaB = CRIATURAS.find(c => c.id === s.criaturaB);
+
+  $('.autores').insertAdjacentHTML("beforeend", `
+    <a class="persona" alt="${s.seudonimo}" href="${s.instagram}" target="_blank" style="--criaturaA: ${CriaturaA.color1L}; --criaturaA-dark: ${CriaturaA.color1D}; --criaturaB: ${CriaturaB.color1L}">
+      <img src="img/autores/${s.id}.webp">
+      <p class="seudonimo">${s.seudonimo}</p>
+      <p class="usuario">${extraerUsuarioInstagram(s.instagram)}</p>
+      <p class="nombre-completo">${s.completo}</p>
+    </a>
+  `)
+})
+
+
 /* OUT ANIM */
 
 document.querySelectorAll("a").forEach((s) => {

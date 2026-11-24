@@ -67,8 +67,8 @@ body {
   position: absolute;
   left: 50%;
   top: var(--top-planeta);
-  width: calc(var(--alto-pagina) + 10vw);
-  height: calc(var(--alto-pagina) + 30vh);
+  width: max(240vw, (var(--alto-pagina) / 1.5));
+  height: calc(var(--alto-pagina));
   transform: translateX(-50%);
   border-radius: 100%;
   background: var(--planeta);
@@ -279,7 +279,7 @@ h2 {
 .planeta-texto { max-width: 40ch; color: var(--texto-suave); }
 .planeta-texto p + p { margin-top: 1.2rem; }
 
-#indice {
+#indice, #contacto {
   margin-top: 30vh;
 }
 .indice {
@@ -451,12 +451,123 @@ h2 {
   }
 }
 
+#contacto .autores {
+  margin-top: 10vmin;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+
+  width: 100%;
+
+  .persona {
+    flex: 1 1 0; /* crece y se encoge partiendo de 0 */
+    min-width: 0; /* clave para que textos o contenidos largos no fuercen el desborde */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1cqh;
+
+    position: relative;
+    text-decoration: none;
+    color: var(--texto);
+
+      > img {
+        border-radius: 50%;
+        width: 90%;
+        aspect-ratio: 1;
+        object-fit: contain;
+
+        margin-bottom: 1.5cqh;
+
+        transition: transform 0.3s ease;
+      }
+
+      > p {
+        display: block;
+        width: 100%;
+        text-align: center;
+
+        transition: transform 0.35s ease;
+      }
+
+      .seudonimo {
+        font-family: var(--titulo);
+        font-size: clamp(0.8rem, 4vmin, 2cqw);
+        text-transform: uppercase;
+        color: color-mix(in srgb, var(--criaturaA) 30%, var(--texto) 70%);
+
+        margin-bottom: 1cqh;
+        text-shadow:
+          2px 2px 3px var(--planeta);
+
+        transition: transform 0.25s ease, color 0.25s ease;
+      }
+
+      .usuario {
+        color: color-mix(in srgb, var(--criaturaB) 30%, var(--texto) 70%);
+        font-size: clamp(0.6rem, 3vmin, 2cqw);
+        transition: transform 0.35s ease, color 0.25s ease;
+      }
+
+      .nombre-completo {
+        opacity: 60%;
+        font-size: clamp(0.5rem, 2vmin, 1cqw);
+      }
+
+    &:hover {
+      img {
+        transform: scale(1.4);
+      }
+
+      > p {
+        transform: translateY(4.5vmin);
+      }
+
+      .seudonimo {
+        transform: scale(1.2) translateY(4vmin);
+        color: var(--criaturaA);
+      }
+
+      .usuario {
+        color: var(--criaturaB);
+      }
+
+      &::before {
+        opacity: 50%;
+      }
+    }
+  }
+}
+.persona::before {
+  content: ""; 
+    position: absolute; 
+    width: 200%;
+    aspect-ratio: 1/1; 
+    border-radius: 50%;
+    opacity: 0;
+    background: radial-gradient(circle in hsl shorter hue, var(--criaturaA), var(--criaturaA-dark));
+    filter: blur(5vmin);
+
+    z-index: -1;
+
+    top: 50%;
+    left: 50%;
+
+    translate: -50% -62%;
+    transition: opacity 0.5s ease;
+}
+
 #Creditos{
   position: absolute;
 
   padding: 1em;
   padding-top: 0;
-  top: calc(var(--top-planeta) + var(--alto-pagina) + 30vh + 15vmin);
+  top: calc(var(--top-planeta) + var(--alto-pagina) + 15vmin);
 
   width: 100vw;
   
