@@ -21,7 +21,7 @@ $(".Nav").insertAdjacentHTML("beforeend", `
         <nav class="NavegacionBarra">
             <a href="index.html">INICIO</a>
             <a href="index.html#indice">CRIATURAS</a>
-            <a href="contacto-vidra.html">CONTACTO</a>
+            <a href="index.html#autores">CONTACTO</a>
         </nav>
     `)
 
@@ -64,8 +64,10 @@ a(".criaprev").forEach((s) => s.href = `${criaturaPrev.id}.html`);
 /* mini indice inferior */
 
 CRIATURAS.forEach((s) => {
+    let opacity = ""
+    if (Criatura.id === s.id) opacity = `style="opacity: 1; transform: scale(1.3)"`
     $(".minindice").insertAdjacentHTML("beforeend", `
-        <a href="${s.id}.html"><img src="img/iconos/${s.id}.webp"></a>
+        <a href="${s.id}.html"><img src="img/iconos/${s.id}.webp" ${opacity}></a>
     `)
 })
 

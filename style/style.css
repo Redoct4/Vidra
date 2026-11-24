@@ -194,6 +194,20 @@ body {
    3. SECCIONES DE ABAJO
    ============================================================ */
 
+.divisor {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  margin: 25vmin 0;
+
+  > img {
+    width: 35vw;
+    opacity: 80%;
+  }
+}
+
 .cuerpo {
   position: relative;
   width: 100vw;
@@ -279,9 +293,7 @@ h2 {
 .planeta-texto { max-width: 40ch; color: var(--texto-suave); }
 .planeta-texto p + p { margin-top: 1.2rem; }
 
-#indice, #contacto {
-  margin-top: 30vh;
-}
+
 .indice {
   margin-top: 1vmin;
   position: relative;
