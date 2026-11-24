@@ -484,6 +484,10 @@ body {
     #Creditos{
         font-size: 0.5rem;
     }
+
+    .divisor img {
+        width: 80vw;
+    }
 }
 
 @media (orientation: portrait) {
