@@ -1,0 +1,22 @@
+Favicon installation
+
+1. Copy the PNG, SVG, ICO, and site.webmanifest files to / on your website.
+   This is a URL directory relative to the site root, not a filesystem path.
+2. Add the following markup inside the <head> of your pages:
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+
+3. Deploy the files and pages together, then reload your site.
+   Browsers cache favicons aggressively; a hard refresh or cleared cache may be needed.
+
+All generated icons honour your corner-radius setting. In text mode, Apple and
+Android icons sit on a solid background; uploaded images keep their own colors.
+Android icons use purpose "any", not "maskable".
+The manifest alone does not make a site an offline-capable or installable PWA.
