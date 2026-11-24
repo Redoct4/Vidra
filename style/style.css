@@ -400,7 +400,7 @@ h2 {
     color: var(--nombre-color);
 
     transform: translateY(-3vh);
-    transition: transform 0.4s 0.2s, opacity 0.2s 0.2s;
+    transition: transform 0.4s, opacity 0.2s 0.2s;
   }
 
   > img {
@@ -411,7 +411,7 @@ h2 {
 
     transform: scale(0.9);
 
-    transition: transform 0.3s 0.1s;
+    transition: transform 0.3s;
   }
 
   > .indice-cientifico {
@@ -455,11 +455,17 @@ h2 {
     transform: scale(1);
     @starting-style { transform: scale(0.9);}
   }
+  &:hover > img {
+    transform: scale(1.1);
+  }
 
   > .indice-titulo {
     transform: translateY(0);
     opacity: 1;
     @starting-style { transform: translateY(-5vh); opacity: 0; }
+  }
+  &:hover > .indice-titulo {
+    transform: translateY(-3vh);
   }
 }
 

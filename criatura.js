@@ -55,7 +55,7 @@ $(".Nav").insertAdjacentHTML("beforeend", `
         <nav class="NavegacionBarra">
             <a href="index.html">INICIO</a>
             <a href="index.html#indice">CRIATURAS</a>
-            <a href="index.html#autores">CONTACTO</a>
+            <a href="index.html#contacto">CONTACTO</a>
         </nav>
     `)
 
